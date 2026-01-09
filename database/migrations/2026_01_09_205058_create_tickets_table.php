@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained(); // user que abriu o ticket (chamado)
             $table->string('title');
+            $table->string('description')->nullable();
             $table->text('status', ['open', 'in_progress', 'resolved'])->default('open');
             $table->timestamps();
         });
