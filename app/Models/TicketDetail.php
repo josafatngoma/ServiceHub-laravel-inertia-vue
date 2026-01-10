@@ -9,9 +9,9 @@ class TicketDetail extends Model
 {
     protected $fillable = [
         'ticket_id',
-        'upload_path',
+        'attachment_file',
         'json_upload_data',
-        'txt_upload_data',
+        'txt_upload',
     ];
 
     public function ticket(): BelongsTo
