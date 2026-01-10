@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ProcessTicketAttachment;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,10 +52,11 @@ class TicketController extends Controller
                 $ticket->detail()->create([
                     'attachment_file' => $path,
                     'json_upload_data' => null, //processamento com Jobs
-                    'txt_upload' => 'Carregando...',
+                    'msg_upload' => 'Carregando...',
                 ]);
 
                 //disparando o job para processar o arquivo upload
+                ProcessTicketAttachment::dispatch($ticket);
 
             });
 

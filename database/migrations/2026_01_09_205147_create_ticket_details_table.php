@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('ticket_id')->constrained()->onDelete('cascade');
             $table->string('attachment_file')->nullable();
             $table->json('json_upload_data')->nullable();
-            $table->text('txt_upload')->nullable();
+            $table->text('msg_upload')->nullable();
             $table->timestamps();
         });
     }
