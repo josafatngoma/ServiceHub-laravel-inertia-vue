@@ -5,9 +5,35 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
-Route::middleware('auth')->group(function () {
-    Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
-    Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
+Route::group(['middleware' => 'auth', 'verified'], function () {
+    
+    //dashboard
+    Route::get('dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+
+    //tickets
+    Route::prefix('tickets')->group(function () {
+
+        //listar tickets
+        Route::get('/', [TicketController::class, 'index'])->name('tickets.index');
+
+        //cadastrar tickets
+        Route::get('/create', [TicketController::class, 'create'])->name('tickets.create');
+        Route::post('/', [TicketController::class, 'store'])->name('tickets.store');
+
+        //visualizar ticket
+        Route::get('/{ticket}', [TicketController::class, 'show'])->name('tickets.show');
+
+        //editar tickets
+        Route::get('/{tickets}/edit', [TicketController::class, 'edit'])->name('tickets.edit');
+        Route::put('/{tickets}', [TicketController::class, 'update'])->name('tickets.update');
+
+        //apagar tickets
+        Route::delete('/{tickets}', [TicketController::class, 'destroy'])->name('tickets.destroy');
+
+    });
+    
 });
 
 Route::get('/', function () {
@@ -15,9 +41,5 @@ Route::get('/', function () {
         'canRegister' => Features::enabled(Features::registration()),
     ]);
 })->name('home');
-
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/settings.php';

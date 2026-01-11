@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\ProcessTicketAttachment;
 use App\Models\Project;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,11 +13,30 @@ use Inertia\Response;
 
 class TicketController extends Controller
 {
+
+    //listar os tickets (chamados)
+    public function index()
+    {
+        //buscando todos os tickets, sem limitar a visualização por usuário logado
+        $tickets = Ticket::with(['user:id,name', 'project:id,name'])->orderBy('created_at', 'desc')->paginate(5);
+        return Inertia::render('tickets/Index', [
+            'tickets' => $tickets,
+        ]);
+    }
+
+    //mostrar detalhes do ticket (chamado)
+    public function show(Ticket $ticket)
+    {
+        return Inertia::render('tickets/Show', [
+            'ticket' => $ticket->load(['user:id,name', 'project:id,name']),
+        ]);
+    }
+
     //listando os projetos no formulario de criação de tickets (chamados)
     public function create(): Response
     {
         $projects = Project::where('status', 'active')->select('id', 'name')->get();
-        return Inertia::render('Tickets/Create', [
+        return Inertia::render('tickets/Create', [
             'projects' => $projects,
         ]);
     }
@@ -27,17 +47,19 @@ class TicketController extends Controller
         $validatedData = $request->validate([
             'project_id' => 'required|exists:projects,id',
             'title' => 'required|string|max:255',
-            'attachment_file' => 'nullable|file|mimes:josn,txt|max:2048',
+            'description' => 'required|string',
+            'attachment_file' => 'nullable|file|mimes:json,txt|max:2048',
         ]);
 
         try {
             //certificando que insere em todas as tabelas ou nenhuma
-            DB::transaction(function () use ($validatedData, $request) {
+            $ticket = DB::transaction(function () use ($validatedData, $request) {
 
                 //criando o ticket
                 $ticket = Auth::user()->tickets()->create([
                     'project_id' => $validatedData['project_id'],
                     'title' => $validatedData['title'],
+                    'description' => $validatedData['description'],
                     'status' => 'open',
                 ]);
 
@@ -58,9 +80,10 @@ class TicketController extends Controller
                 //disparando o job para processar o arquivo upload
                 ProcessTicketAttachment::dispatch($ticket);
 
+                return $ticket;
             });
 
-            return redirect()->route('tickets.index')->with('success', 'Chamado aberto com sucesso! <br> O anexo está em processamento.');
+            return redirect()->route('tickets.show', ['ticket' => $ticket->id])->with('success', 'Chamado aberto com sucesso! <br> O anexo está em processamento.');
 
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Erro ao abrir o chamado: ' . $e->getMessage()]);
