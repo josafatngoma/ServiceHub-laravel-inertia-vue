@@ -3,26 +3,13 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/vue3';
-import { Ticket, Clock, CheckCircle2, Plus, ArrowRight } from 'lucide-vue-next';
+import { Plus } from 'lucide-vue-next';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Dashboard',
         href: dashboard().url,
     },
-];
-
-// Dados Mockados apenas para visualização (depois virão do Backend)
-const stats = [
-    { label: 'Total de Tickets', value: '24', icon: Ticket, desc: 'Histórico completo' },
-    { label: 'Em Aberto', value: '5', icon: Clock, desc: 'Aguardando ação', color: 'text-amber-600' },
-    { label: 'Resolvidos', value: '19', icon: CheckCircle2, desc: 'Finalizados com sucesso', color: 'text-green-600' },
-];
-
-const recentTickets = [
-    { id: 105, title: 'Erro na integração de API', project: 'Alpha Corp', status: 'Aberto', date: 'Hoje, 10:30' },
-    { id: 104, title: 'Ajuste de CSS na Landing Page', project: 'Beta Ltda', status: 'Em Progresso', date: 'Ontem' },
-    { id: 103, title: 'Backup do banco de dados', project: 'Alpha Corp', status: 'Concluído', date: '10/01/2026' },
 ];
 </script>
 
