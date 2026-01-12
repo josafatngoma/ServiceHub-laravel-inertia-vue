@@ -25,7 +25,9 @@
     });
 
     const submit = () => {
-        form.post(route('tickets.store'));
+        form.post(route('tickets.store'), {
+            forceFormData: true,
+        });
     };
 
     // manipulação do anexo
@@ -68,7 +70,7 @@
                                 id="title"
                                 class="flex h-9 w-full rounded-md border border-gray-300 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 dark:border-zinc-700 dark:text-gray-100 dark:focus-visible:ring-gray-300"
                                 placeholder="Resumo do problema"
-                                required
+                                
                             />
                             <div v-if="form.errors.title" class="text-xs text-red-500">{{ form.errors.title }}</div>
                         </div>
@@ -82,7 +84,7 @@
                                     id="project_id"
                                     v-model="form.project_id"
                                     class="flex h-9 w-full appearance-none rounded-md border border-gray-300 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 dark:border-zinc-700 dark:text-gray-100 dark:bg-zinc-900"
-                                    required
+                                    
                                 >
                                     <option value="" disabled class="text-gray-500">Selecione...</option>
                                     <option v-for="project in projects" :key="project.id" :value="project.id">
@@ -106,8 +108,7 @@
                             id="description"
                             rows="3"
                             class="flex min-h-[60px] w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 dark:border-zinc-700 dark:text-gray-100 dark:focus-visible:ring-gray-300"
-                            required
-                            placeholder="Detalhes..."
+                            placeholder="Detalhes do problema..."
                         ></textarea>
                         <div v-if="form.errors.description" class="text-xs text-red-500">{{ form.errors.description }}</div>
                     </div>
@@ -115,20 +116,25 @@
                     <div class="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
                         
                         <div class="w-full space-y-1.5 md:w-2/3">
-                            <label class="text-xs font-medium text-gray-900 dark:text-gray-300">Anexo (JSON/TXT)</label>
-                            <div class="flex items-center gap-2">
-                                <Input
-                                    id="attachment_file"
-                                    type="file"
-                                    @change="handleFileUpload"
-                                    class="h-9 w-full cursor-pointer file:mr-4 file:h-full file:border-0 file:bg-gray-100 file:px-4 file:text-xs file:font-semibold file:text-gray-700 hover:file:bg-gray-200 dark:file:bg-zinc-800 dark:file:text-gray-300"
-                                    accept=".json,.txt,.pdf"
-                                />
-                            </div>
+                            <label for="attachment_file" class="text-xs font-medium text-gray-900 dark:text-gray-300">
+                                Anexo (JSON/TXT)
+                            </label>
+                            
+                            <input
+                                id="attachment_file"
+                                type="file"
+                                @change="handleFileUpload"
+                                class="flex w-full rounded-md border border-gray-300 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:mr-4 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-700 dark:text-gray-100 dark:focus-visible:ring-gray-300 file:text-gray-900 dark:file:text-gray-100"
+                                accept=".json,.txt,.pdf"
+                            />
+
                             <div v-if="form.progress" class="h-1.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-zinc-700">
                                 <div class="h-full bg-indigo-600 transition-all" :style="{ width: form.progress.percentage + '%' }"></div>
                             </div>
-                            <InputError :message="form.errors.attachment_file" />
+
+                            <div v-if="form.errors.attachment_file" class="text-xs text-red-500">
+                                {{ form.errors.attachment_file }}
+                            </div>
                         </div>
 
                         <div class="flex w-full justify-end md:w-auto">

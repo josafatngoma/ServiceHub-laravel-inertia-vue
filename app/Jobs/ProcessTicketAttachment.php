@@ -57,10 +57,12 @@ class ProcessTicketAttachment implements ShouldQueue
             //mudando o status do ticket
             $this->ticket->update(['status' => 'in_progress']);
 
+            $this->ticket->user->notify(new \App\Notifications\TicketProcessed($this->ticket));
+
             //notificando o usuário responsável
-            Log::info("Notificação enviada para o responsável do Ticket ID: {$this->ticket->id}");
+            Log::info("Notificação enviada para o responsável do Ticket #:{$this->ticket->id}");
         }else {
-            Log::error("Arquivo anexado não encontrado para o Ticket ID: {$this->ticket->id}");
+            Log::error("Arquivo anexado não encontrado para o Ticket #:{$this->ticket->id}");
             $detail->update([
                 'msg_upload' => 'Erro: Arquivo anexado não encontrado.',
             ]);

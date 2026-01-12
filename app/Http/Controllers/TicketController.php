@@ -44,12 +44,24 @@ class TicketController extends Controller
     //salvando o ticket (chamado) + upload no banco de dados
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'project_id' => 'required|exists:projects,id',
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'attachment_file' => 'nullable|file|mimes:json,txt|max:2048',
-        ]);
+        $validatedData = $request->validate(
+            [
+                'project_id' => 'required|exists:projects,id',
+                'title' => 'required|string|max:255',
+                'description' => 'required|string',
+                'attachment_file' => 'nullable|file|mimes:json,txt|max:2048',
+            ],
+            [
+                'project_id.required' => 'O campo projeto é obrigatório.',
+                'project_id.exists' => 'O projeto selecionado é inválido.',
+                'title.required' => 'O campo título é obrigatório.',
+                'title.max' => 'O campo título não pode exceder 255 caracteres.',
+                'description.required' => 'O campo descrição é obrigatório.',
+                'attachment_file.file' => 'O anexo deve ser um arquivo válido.',
+                'attachment_file.mimes' => 'O anexo deve ser um arquivo do tipo: json, txt.',
+                'attachment_file.max' => 'O anexo não pode exceder 2MB.',
+            ]
+        );
 
         try {
             //certificando que insere em todas as tabelas ou nenhuma
