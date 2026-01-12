@@ -42,20 +42,19 @@ const paginatedLinks = computed(() => {
 </script>
 
 <template>
-    <!-- Container da paginação -->
     <div class="pagination-container">
-        <!-- Itera sobre os links filtrados e renderiza cada um -->
-        <!-- v-for - Diretiva do Vue para iterar sobre array -->
-        <!-- :key - Identificador único para cada item da lista -->
-        <!-- :href - Define o link da página; se null, usa string vazia -->
-        <!-- :class - Aplica classes condicionalmente -->
-        <!-- v-html - Renderiza o HTML do label do link -->
-        <Link v-for="link in paginatedLinks" :key="link.label" :href="link.url ?? ''" class="pagination-link" :class="{
-            // Classe quando a página está ativa 
-            'pagination-link-active': link.active,
-            // Classe quando o link não possui URL
-            'pagination-link-disabled': !link.url,
-        }" v-html="link.label" />
+        <Link 
+            v-for="(link, index) in paginatedLinks" 
+            :key="index" 
+            :href="link.url ?? ''" 
+            class="pagination-link" 
+            :class="{
+                'pagination-link-active': link.active,
+                'pagination-link-disabled': !link.url,
+            }"
+        >
+            <span v-html="link.label"></span>
+        </Link>
     </div>
 </template>
 
