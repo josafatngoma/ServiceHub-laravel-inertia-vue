@@ -1,6 +1,17 @@
 import { InertiaLinkProps } from '@inertiajs/vue3';
 import type { LucideIcon } from 'lucide-vue-next';
 
+export interface Ticket {
+    id: number;
+    title: string;
+    description: string;
+    project_id: number;
+    
+    status: string;         
+    status_label: string;   
+    status_classes: string; 
+}
+
 export interface Auth {
     user: User;
 }

@@ -98,8 +98,11 @@
 
                     <div>
                         <span class="block text-xs font-medium uppercase text-gray-500 dark:text-gray-400">Status Atual</span>
-                        <span class="mt-1 inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900/50 dark:text-blue-200">
-                            {{ ticket.status }}
+                        <span 
+                            class="px-2 py-1 rounded-full text-xs font-medium"
+                            :class="ticket.status_classes" 
+                        >
+                            {{ ticket.status_label }}
                         </span>
                     </div>
                 </div>
