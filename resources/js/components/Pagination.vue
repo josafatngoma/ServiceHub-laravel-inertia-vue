@@ -1,12 +1,8 @@
 <script setup lang="ts">
 
-/* Importa o componente do Inertia */
 import { Link } from '@inertiajs/vue3';
-
-// Importa a função computed do Vue para criar propriedades reativas derivadas
 import { computed } from 'vue';
 
-// Definir as props do componente, que são os links de paginação recebidos da controller
 const props = defineProps<{
     links: { url: string | null; label: string; active: boolean }[]
 }>();

@@ -1,9 +1,8 @@
 <script setup lang="ts">
     import AppLayout from '@/layouts/AppLayout.vue';
-    import { Head, Link, useForm } from '@inertiajs/vue3';
+    import { Head, useForm } from '@inertiajs/vue3';
     import { type BreadcrumbItem } from '@/types';
-    import { List, CirclePlus } from 'lucide-vue-next';
-    import FlashMessage from '@/components/FlashMessage.vue';
+    import { CirclePlus } from 'lucide-vue-next';
 
     //listando os projetos no formulário
     defineProps<{

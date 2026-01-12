@@ -4,7 +4,6 @@
     import { type BreadcrumbItem } from '@/types';
     import { CirclePlus, Eye, Pencil } from 'lucide-vue-next';
     import Pagination from '@/components/Pagination.vue';
-    import FlashMessage from '@/components/FlashMessage.vue';
     import DeleteButton from '@/components/DeleteButton.vue';
 
     //definindo a interface Ticket
@@ -56,8 +55,6 @@
                     </Link>
                 </div>
             </div>
-            
-            <FlashMessage />
 
             <div class="relative w-full overflow-auto">
                 <table class="w-full text-left text-sm text-gray-500 dark:text-gray-400">

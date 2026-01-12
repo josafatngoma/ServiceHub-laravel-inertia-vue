@@ -3,7 +3,6 @@
     import { Head, Link } from '@inertiajs/vue3';
     import { type BreadcrumbItem } from '@/types';
     import { List, Pencil } from 'lucide-vue-next';
-    import FlashMessage from '@/components/FlashMessage.vue';
     import DeleteButton from '@/components/DeleteButton.vue';
 
     //definindo a interface Ticket
@@ -62,8 +61,6 @@
                     />
                 </div>
             </div>
-            
-            <FlashMessage />
 
             <div class="p-6">
                 <div class="mb-6">
