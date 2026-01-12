@@ -48,12 +48,15 @@ Este projeto é uma solução de gestão de tickets de suporte, desenvolvida com
     ```bash
     php artisan serve
     npm run dev
+    OU
+    composer run dev
     ```
 
 ### Via Laravel Sail (Docker)
 ```bash
 ./vendor/bin/sail up -d
 ./vendor/bin/sail artisan migrate --seed
+```
 
 ## ⚙️ Processamento de Filas e Notificações
 
