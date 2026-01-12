@@ -45,10 +45,10 @@ class ProcessTicketAttachment implements ShouldQueue
             $fileContent = Storage::get($detail->attachment_file);
 
             // decodificando o conteúdo JSON
-            $jsonData = json_encode($fileContent, true);
+            $jsonData = json_decode($fileContent, true);
 
             // Atualizando os detalhes do ticket com os dados processados
-            $proccessedData = $jsonData ?? ['raw_content' => $fileContent];
+            $proccessedData = $jsonData ? $jsonData : ['raw_content' => $fileContent];
             $detail->update([
                 'json_upload_data' => $proccessedData,
                 'msg_upload' => 'Processamento concluído com sucesso.',
