@@ -41,7 +41,7 @@ class TicketProcessed extends Notification
             ->subject('Anexo : #' . $this->ticket->id .' Processado')
             ->greeting('Olá ' . $notifiable->name)
             ->line('O anexo do seu ticket #' . $this->ticket->id . ' foi processado com sucesso.')
-            ->line('Status atual do ticket: ' . $this->ticket->status)
+            ->line('Status atual do ticket: ' . ($this->ticket->status->value ?? $this->ticket->status))
             ->line('Você pode visualizar os detalhes do ticket clicando no botão abaixo.')
             ->action('Ver Ticket', route('tickets.show', $this->ticket->id))
             ->line('Obrigado por usar nossa aplicação!');

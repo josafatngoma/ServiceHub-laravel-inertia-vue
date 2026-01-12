@@ -13,10 +13,10 @@ import { Form, Head } from '@inertiajs/vue3';
 
 <template>
     <AuthBase
-        title="Create an account"
-        description="Enter your details below to create your account"
+        title="Criar nova conta"
+        description="Preencha seus dados para começar"
     >
-        <Head title="Register" />
+        <Head title="Registrar" />
 
         <Form
             v-bind="store.form()"
@@ -26,7 +26,7 @@ import { Form, Head } from '@inertiajs/vue3';
         >
             <div class="grid gap-6">
                 <div class="grid gap-2">
-                    <Label for="name">Name</Label>
+                    <Label for="name">Nome completo</Label>
                     <Input
                         id="name"
                         type="text"
@@ -35,13 +35,14 @@ import { Form, Head } from '@inertiajs/vue3';
                         :tabindex="1"
                         autocomplete="name"
                         name="name"
-                        placeholder="Full name"
+                        placeholder="Seu nome"
+                        class="bg-white dark:bg-zinc-900"
                     />
                     <InputError :message="errors.name" />
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="email">Email address</Label>
+                    <Label for="email">E-mail</Label>
                     <Input
                         id="email"
                         type="email"
@@ -49,13 +50,14 @@ import { Form, Head } from '@inertiajs/vue3';
                         :tabindex="2"
                         autocomplete="email"
                         name="email"
-                        placeholder="email@example.com"
+                        placeholder="seu@email.com"
+                        class="bg-white dark:bg-zinc-900"
                     />
                     <InputError :message="errors.email" />
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="password">Password</Label>
+                    <Label for="password">Senha</Label>
                     <Input
                         id="password"
                         type="password"
@@ -63,13 +65,14 @@ import { Form, Head } from '@inertiajs/vue3';
                         :tabindex="3"
                         autocomplete="new-password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="••••••••"
+                        class="bg-white dark:bg-zinc-900"
                     />
                     <InputError :message="errors.password" />
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="password_confirmation">Confirm password</Label>
+                    <Label for="password_confirmation">Confirmar senha</Label>
                     <Input
                         id="password_confirmation"
                         type="password"
@@ -77,31 +80,33 @@ import { Form, Head } from '@inertiajs/vue3';
                         :tabindex="4"
                         autocomplete="new-password"
                         name="password_confirmation"
-                        placeholder="Confirm password"
+                        placeholder="••••••••"
+                        class="bg-white dark:bg-zinc-900"
                     />
                     <InputError :message="errors.password_confirmation" />
                 </div>
 
                 <Button
                     type="submit"
-                    class="mt-2 w-full"
+                    class="mt-2 w-full bg-zinc-900 text-white transition-all hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
                     tabindex="5"
                     :disabled="processing"
                     data-test="register-user-button"
                 >
-                    <Spinner v-if="processing" />
-                    Create account
+                    <Spinner v-if="processing" class="mr-2 h-4 w-4" />
+                    Criar conta
                 </Button>
             </div>
 
-            <div class="text-center text-sm text-muted-foreground">
-                Already have an account?
+            <div class="text-center text-sm text-zinc-500 dark:text-zinc-400">
+                Já possui uma conta?
                 <TextLink
                     :href="login()"
-                    class="underline underline-offset-4"
+                    class="font-medium text-zinc-900 underline underline-offset-4 hover:text-zinc-700 dark:text-zinc-100 dark:hover:text-zinc-300"
                     :tabindex="6"
-                    >Log in</TextLink
                 >
+                    Entrar
+                </TextLink>
             </div>
         </Form>
     </AuthBase>

@@ -43,22 +43,6 @@
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
                     Detalhes do Ticket
                 </h3>
-                
-                <div class="flex items-center gap-2">
-                    <Link
-                        :href="`/tickets/${ticket.id}/edit`"
-                        class="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:border-zinc-700 dark:bg-zinc-800 dark:text-gray-300 dark:hover:bg-zinc-700"
-                    >
-                        <Pencil class="h-4 w-4" />
-                        <span>Editar</span>
-                    </Link>
-                    
-                    <DeleteButton
-                        :url="`/tickets/${ticket.id}`"
-                        title="Tem a certeza que deseja apagar este ticket?"
-                        class="inline-flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:hover:bg-red-500"
-                    />
-                </div>
             </div>
 
             <div class="p-6">

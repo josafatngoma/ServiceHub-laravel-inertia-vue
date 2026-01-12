@@ -98,22 +98,7 @@
                                     >
                                         <Eye class="h-3 w-3" />
                                         <span>Ver</span>
-                                    </Link>
-                                    
-                                    <Link
-                                        :href="`/tickets/${ticket.id}/edit`"
-                                        class="inline-flex items-center gap-1 rounded border border-gray-300 bg-white px-2 py-1 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:border-zinc-700 dark:bg-zinc-800 dark:text-gray-300 dark:hover:bg-zinc-700"
-                                    >
-                                        <Pencil class="h-3 w-3" />
-                                        <span>Editar</span>
-                                    </Link>
-
-                                    <DeleteButton
-                                        :url="`/tickets/${ticket.id}`"
-                                        title="Apagar Ticket"
-                                        buttonText="Apagar"
-                                        class="inline-flex items-center gap-1 rounded bg-red-600 px-2 py-1 text-xs font-medium text-white shadow-sm hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:hover:bg-red-500"
-                                    /> 
+                                    </Link> 
                                 </div>
                             </td>
                         </tr>
