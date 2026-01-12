@@ -21,7 +21,7 @@
         };
     }
 
-    const props = defineProps<{
+    const { ticket } = defineProps<{
         ticket: Ticket;
     }>();
 
