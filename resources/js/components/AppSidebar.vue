@@ -14,28 +14,22 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, Ticket } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
+import { route } from 'ziggy-js';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: 'Home',
         href: dashboard(),
         icon: LayoutGrid,
     },
-];
+    {
+        title: 'Tickets',
+        href: route('tickets.index'),
+        icon: Ticket,
+    },
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
-    },
 ];
 </script>
 

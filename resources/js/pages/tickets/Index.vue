@@ -63,9 +63,8 @@
                             <th scope="col" class="px-6 py-3 font-medium">Título</th>
                             <th scope="col" class="px-6 py-3 font-medium">Projeto</th>
                             <th scope="col" class="px-6 py-3 font-medium">Status</th>
-                            <th scope="col" class="px-6 py-3 font-medium">Prioridade</th>
                             <th scope="col" class="px-6 py-3 font-medium">Criado em</th>
-                            <th scope="col" class="px-6 py-3 font-medium">Ações</th>
+                            <th scope="col" class="px-6 py-3 font-medium text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-zinc-800">
@@ -88,7 +87,6 @@
                                     {{ ticket.status_label }}
                                 </span>
                             </td>
-                            <td class="px-6 py-4">--</td>
                             <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
                                 {{ new Date(ticket.created_at).toLocaleDateString() }}
                             </td>
